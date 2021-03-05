@@ -1,7 +1,7 @@
 export const USER = 'USER'
 
-export function getUserFromLs(user) {
-    localStorage.getItem(USER);
+export function getUserFromLs() {
+    const user = localStorage.getItem(USER);
 
     if (user && user.token) return JSON.parse(user);
 
@@ -11,7 +11,7 @@ export function getUserFromLs(user) {
         token: ''
     }
 }
-export function putUserInLs(USER, user) {
+export function putUserInLs(user) {
     localStorage.setItem(USER, JSON.stringify(user));
 
 }

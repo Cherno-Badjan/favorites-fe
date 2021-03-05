@@ -7,7 +7,7 @@ export default class FavoritesPage extends Component {
     }
 
     componentDidMount = async () => {
-        const favorites = await getFavorites(this.props.token);
+        const favorites = await getFavorites(this.props.user.token);
         console.log(favorites)
 
         this.setState({ favorites })
@@ -24,8 +24,9 @@ export default class FavoritesPage extends Component {
                 <div className="favorites">
                     {this.state.favorites.map(fav => <div className="favorite" key={`${fav.yelp_id}`}>
                         <img src={fav.image_url} alt={fav.yelp_id} />
-                        <p>Restaurant name:{fav.name}</p>
-                        <p>Rating:{fav.rating}</p>
+                        <p>Restaurant name:</p>
+                        <p>{fav.name}</p>
+                        <p>Rating: {fav.rating}</p>
                         <button onClick={this.handleDeleteFavoriteClick}>Remove from Favorites</button>
 
                     </div>)

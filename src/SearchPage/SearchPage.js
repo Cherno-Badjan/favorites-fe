@@ -49,9 +49,9 @@ export default class SearchPage extends Component {
     handleLocationChange = (e) => this.setState({ location: e.target.value })
 
     isAFavorite = (restaurant) => {
-        // if (!this.props.token) return true;
+        if (!this.props.token) return true;
 
-        const isInFavorites = this.state.favorites.find(favorite => favorite.yelp_id === restaurant.yelp_id);
+        const isInFavorites = this.state.favorites.find(favorite => favorite.yelp_id === restaurant.id);
 
         return Boolean(isInFavorites);
     }
@@ -67,8 +67,8 @@ export default class SearchPage extends Component {
                         this.state.restaurants.map((restaurant) =>
                             <div key={`${restaurant.name}-${restaurant.yelp_id}`} className='restaurant'>
                                 <img src={restaurant.image_url} alt={restaurant.id} />
-                                <p>Restaurant name:{restaurant.name}</p>
-                                <p>Rating:{restaurant.rating}</p>
+                                <p>{restaurant.name}</p>
+                                <p>Rating: {restaurant.rating}</p>
                                 <p>{this.isAFavorite(restaurant) ? '<3' : <button onClick={() => this.handleFavoriteClick(restaurant)}>Add to Favorites</button>}</p>
                             </div>)
                     }
