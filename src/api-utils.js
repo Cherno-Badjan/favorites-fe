@@ -14,7 +14,7 @@ export async function loginUser(email, password) {
 }
 
 export async function searchRestaurants(location, token) {
-    const response = await request.get(`${URL}/api/search?${location}`).set('Authorization', token)
+    const response = await request.get(`${URL}/api/search?location=${location}`).set('Authorization', token)
 
     return response.body
 }

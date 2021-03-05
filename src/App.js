@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import HomePage from './Home/HomePage.js';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 import FavoritesPage from './FavoritesPage/FavoritesPage.js';
@@ -10,7 +9,7 @@ import SignUpPage from './AuthPages/SignUpPage.js';
 import { getUserFromLs, putUserInLs } from './localStorageUtils';
 import HomePage from './Home/HomePage';
 import LoginPage from './AuthPages/LoginPage.js';
-// import { putUserInLs, getUserFromLs } from './localStorageUtils.js';
+
 
 export default class App extends Component {
   state = {
