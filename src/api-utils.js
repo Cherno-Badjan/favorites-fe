@@ -1,6 +1,6 @@
 import request from "superagent";
 
-const URL = 'http://localhost:3001';
+const URL = 'https://frozen-forest-64723.herokuapp.com';
 
 export async function signUpUser(email, password) {
     const response = await request.post(`${URL}/auth/signup`).send({ email, password })
