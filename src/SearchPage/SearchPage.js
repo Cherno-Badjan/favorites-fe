@@ -21,6 +21,9 @@ export default class SearchPage extends Component {
     doSearch = async () => {
         const restaurants = await searchRestaurants(this.state.location, this.props.user.token);
 
+        console.log(restaurants)
+
+
         this.setState({ restaurants });
     }
 
@@ -34,21 +37,23 @@ export default class SearchPage extends Component {
         await addFavorite({
             yelp_id: favRestaurant.yelp_id,
             name: favRestaurant.name,
-            image: favRestaurant.image_url,
+            image_url: favRestaurant.image_url,
             rating: favRestaurant.rating,
         }, this.props.user.token);
+
 
         await this.fetchFavorites();
     }
 
+
     handleLocationChange = (e) => this.setState({ location: e.target.value })
 
     isAFavorite = (restaurant) => {
-        if (!this.props.user.token) return true;
+        // if (!this.props.token) return true;
 
-        const isInFavorites = this.state.favorites.find(favorite => favorite.yelp_id === restaurant.yelp_id)
+        const isInFavorites = this.state.favorites.find(favorite => favorite.yelp_id === restaurant.yelp_id);
 
-        return Boolean(isInFavorites)
+        return Boolean(isInFavorites);
     }
     render() {
         return (
@@ -60,8 +65,8 @@ export default class SearchPage extends Component {
                 <div className="restaurants">
                     {
                         this.state.restaurants.map((restaurant) =>
-                            <div key={`${restaurant.yelp_id}`} className='restaurant'>
-                                <img src={restaurant.image_url} alt={restaurant.yelp_id} />
+                            <div key={`${restaurant.name}-${restaurant.yelp_id}`} className='restaurant'>
+                                <img src={restaurant.image_url} alt={restaurant.id} />
                                 <p>Restaurant name:{restaurant.name}</p>
                                 <p>Rating:{restaurant.rating}</p>
                                 <p>{this.isAFavorite(restaurant) ? '<3' : <button onClick={() => this.handleFavoriteClick(restaurant)}>Add to Favorites</button>}</p>
