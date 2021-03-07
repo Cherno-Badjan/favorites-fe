@@ -13,8 +13,9 @@ export default class FavoritesPage extends Component {
         this.setState({ favorites })
     }
 
-    handleDeleteFavoriteClick = async (e) => {
-        await deleteFavorite(this.props.match.params.restaurantId, this.props.token);
+    handleDeleteFavoriteClick = async (restaurantId) => {
+        await deleteFavorite(restaurantId, this.props.user.token);
+
 
     }
     render() {

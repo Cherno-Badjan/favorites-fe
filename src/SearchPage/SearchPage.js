@@ -10,6 +10,7 @@ export default class SearchPage extends Component {
 
     componentDidMount = async () => {
         if (this.props.token) await this.fetchFavorites();
+
     }
 
     fetchFavorites = async () => {
@@ -21,10 +22,8 @@ export default class SearchPage extends Component {
     doSearch = async () => {
         const restaurants = await searchRestaurants(this.state.location, this.props.user.token);
 
-        console.log(restaurants)
-
-
         this.setState({ restaurants });
+        this.fetchFavorites();
     }
 
     handleSubmit = async (e) => {
@@ -49,9 +48,13 @@ export default class SearchPage extends Component {
     handleLocationChange = (e) => this.setState({ location: e.target.value })
 
     isAFavorite = (restaurant) => {
-        if (!this.props.token) return true;
+        // if (!this.props.token) return false;
 
-        const isInFavorites = this.state.favorites.find(favorite => favorite.yelp_id === restaurant.id);
+        console.log(restaurant)
+
+        console.log(this.state.favorites)
+
+        const isInFavorites = this.state.favorites.find(favorite => favorite.yelp_id === restaurant.yelp_id);
 
         return Boolean(isInFavorites);
     }
@@ -70,6 +73,8 @@ export default class SearchPage extends Component {
                                 <p>{restaurant.name}</p>
                                 <p>Rating: {restaurant.rating}</p>
                                 <p>{this.isAFavorite(restaurant) ? '<3' : <button onClick={() => this.handleFavoriteClick(restaurant)}>Add to Favorites</button>}</p>
+
+
                             </div>)
                     }
                 </div>

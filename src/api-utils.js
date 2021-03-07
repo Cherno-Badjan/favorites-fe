@@ -1,6 +1,6 @@
 import request from "superagent";
 
-const URL = 'https://frozen-forest-64723.herokuapp.com';
+const URL = 'https://frozen-forest-64723.herokuapp.com'
 
 export async function signUpUser(email, password) {
     const response = await request.post(`${URL}/auth/signup`).send({ email, password })
@@ -31,6 +31,8 @@ export async function addFavorite(restaurant, token) {
 }
 export async function deleteFavorite(restaurantId, token) {
     const response = await request.delete(`${URL}/api/favorites/${restaurantId}`).set('Authorization', token)
+
+    console.log(restaurantId)
 
     return response.body
 }
